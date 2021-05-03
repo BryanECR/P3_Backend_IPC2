@@ -5,6 +5,11 @@ class ListaEnlazada:
         self.primero = None
         self.ultimo = None
 
+    #CONVIERTE UNA TUPLA EN UN STRING
+    def convetTuple(tup):
+        cadena = ''.join(tup)
+        return cadena
+
     def vacia(self):
         return self.primero == None
 
@@ -19,8 +24,15 @@ class ListaEnlazada:
         aux = self.primero
         datos = []
         while(aux != None):
-            informacion = {"fecha":aux.fecha,"usuario":aux.usuario,"afectado":aux.afectado,"codigo":aux.codigo,"error":aux.error}
+            fecha = ListaEnlazada.convetTuple(aux.fecha)
+            usuario = ListaEnlazada.convetTuple(aux.usuario)
+            afectado = ListaEnlazada.convetTuple(aux.afectado)
+            codigo = ListaEnlazada.convetTuple(aux.codigo)
+            error = ListaEnlazada.convetTuple(aux.error)
+            informacion = {"fecha":fecha,"usuario":usuario,"afectado":afectado,"codigo":codigo,"error":error}
+            print("fecha"+fecha,"usuario"+usuario,"afectado"+afectado,"codigo"+codigo,"error"+error)
             datos.append(informacion)
+
             aux = aux.siguiente
         
         return datos
@@ -29,12 +41,15 @@ class ListaEnlazada:
         aux = self.primero
         datos = []
         while(aux != None):
+            fecha = ListaEnlazada.convetTuple(aux.fecha)
+            usuario = ListaEnlazada.convetTuple(aux.usuario)
+            afectado = ListaEnlazada.convetTuple(aux.afectado)
+            codigo = ListaEnlazada.convetTuple(aux.codigo)
+            error = ListaEnlazada.convetTuple(aux.error)
 
-            if(aux.fecha == dato1 and aux.ususario == dato2) or (aux.fecha == dato1 and aux.usuario == dato2):
-                informacion = {"fecha":aux.fecha,"usuario":aux.usuario,"afectado":aux.afectado,"codigo":aux.codigo,"error":aux.error}
+            if(fecha == dato1 and usuario == dato2) or (fecha == dato1 and codigo == dato2):
+                informacion = {"fecha":fecha,"usuario":usuario,"afectado":afectado,"codigo":codigo,"error":error}
                 datos.append(informacion)
-            else:
-                return "Not Found"
 
             aux = aux.siguiente
         

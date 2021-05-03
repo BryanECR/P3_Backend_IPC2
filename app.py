@@ -8,6 +8,7 @@ app = Flask(__name__)
 def ping():
     return "algo"
 
+#TOMA UN ARREGLO DE DICCIONARIOS Y AGREGA LA INFORMACION A UNA LISTA ENLAZADA
 @app.route('/setInformacion',methods=['POST'])
 def setInformacion():
     datos = request.get_json()
@@ -22,16 +23,19 @@ def setInformacion():
     print("Agregados correctamente")
     return jsonify({"mensage":"Informacion aceptada correctamente"})
 
+#OBTIENE LA INFORMACION ANTERIORMENTE INGRESADA
 @app.route('/getInformacion',methods=['GET'])
 def getInformacion():
     datos = listadatos.retornarInfomacion()
     return jsonify(datos)
 
-@app.route('/search/<string:dato1>/<string:dato2>')
+#POR MEDIO DE PARAMETROS ESPECIFICOS BUSCA LA INFORMACION EN LA LISTA
+@app.route('/search/<string:dato1>/<string:dato2>',methods=['GET'])
 def search(dato1,dato2):
-    datos = listadatos.busqueda(dato1,dato2)
-    print("dato1: "+dato1+" dato2: "+dato2)
-    return jsonify(datos)
+    fecha = str(dato1).replace("-","/")
+    data = listadatos.busqueda(fecha,str(dato2))
+    
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
